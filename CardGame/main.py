@@ -1,3 +1,4 @@
+#Capmare
 import pygame
 from button import button
 from PIL import Image
