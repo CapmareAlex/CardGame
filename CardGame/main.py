@@ -1,4 +1,5 @@
 #Capmare
+#Giani
 import pygame
 import ptext
 from button import button
