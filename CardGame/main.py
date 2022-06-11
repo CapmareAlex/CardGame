@@ -1,6 +1,11 @@
+#Capmare
 import pygame
+import ptext
 from button import button
 from PIL import Image
+import time
+
+FONT = 'Assets\Fonts\Pixeltype.ttf'
 
 def pil_to_game(img):
     data = img.tobytes("raw", "RGBA")
@@ -67,7 +72,37 @@ def loadTitle():
 
         clock.tick(50)
 
+def howToPlayBtnAction():
+    global gameLoop, BACKGROUND
+    pygame.display.flip()
+    if pygame.mouse.get_pressed()[0]:
+        f = open("Assets/How_To_Play.txt", "r")
+        content = f.read()
+        done = False
+        pygame.init()
+        clock = pygame.time.Clock()
+        while not done:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    done = True
+                if event.type == pygame.KEYDOWN:
+                    done = True
+            screen.blit(BACKGROUND, (0, 0))
+            backButton = button(position=(50, 25), clr='white', cngclr='#ffcc99', size=(100, 50),
+                                text=' <-BACK', font="Assets\Fonts\Pixeltype.ttf", font_size=30)
+            backButton.draw(screen)
+            if backButton.mouseover():
+                if pygame.mouse.get_pressed()[0]:
+                    done = True
 
+            BLUE = pygame.Color('dodgerblue')
+            ptext.draw(content, (10, 60), color=BLUE, fontsize = 35, fontname = FONT)  # Recognizes newline characters.
+            pygame.display.flip()
+            clock.tick(60)
+        PHOTO = pygame.image.load("Assets/Images/frameFromGif.jpg")
+        PHOTO = pygame.transform.scale(PHOTO, (scrInfo.current_w, scrInfo.current_h))
+        screen.blit(PHOTO, (0, 0))
+        pygame.display.update()
 
 def menu():
     global screen, currentFrame, backgroundImage, scrInfo
@@ -79,10 +114,12 @@ def menu():
     incrementButtonY = scrHeight // 6
     incrementButtonX = scrWidth // 6
 
-    playButton = button(position=(buttonsX, buttonsY), clr='white', cngclr='#150503', size=(200, 50), text='PLAY', font="Assets\Fonts\Pixeltype.ttf", font_size=30)
-    optionsButton = button(position=(buttonsX, buttonsY + 3 * incrementButtonY), clr='white', cngclr='#150503', size=(200, 50), text='OPTIONS', font='Assets\Fonts\Pixeltype.ttf', font_size=30)
-    howToPlayButton = button(position=(buttonsX + 3 * incrementButtonX, buttonsY), clr='white', cngclr='#150503', size=(200, 50), text='HOW TO PLAY', font='Assets\Fonts\Pixeltype.ttf', font_size=30)
-    quitButton = button(position=(buttonsX + 3 * incrementButtonX, buttonsY + 3 * incrementButtonY), clr='white', cngclr='#150503', size=(200, 50), text='QUIT', font='Assets\Fonts\Pixeltype.ttf', font_size=30)
+
+
+    playButton = button(position=(buttonsX, buttonsY), clr='white', cngclr='#ffcc99', size=(200, 50), text='PLAY', font="Assets\Fonts\Pixeltype.ttf", font_size=30)
+    optionsButton = button(position=(buttonsX, buttonsY + 3 * incrementButtonY), clr='white', cngclr='#ffcc99', size=(200, 50), text='OPTIONS', font='Assets\Fonts\Pixeltype.ttf', font_size=30)
+    howToPlayButton = button(position=(buttonsX + 3 * incrementButtonX, buttonsY), clr='white', cngclr='#ffcc99', func = howToPlayBtnAction, size=(200, 50), text='HOW TO PLAY', font='Assets\Fonts\Pixeltype.ttf', font_size=30)
+    quitButton = button(position=(buttonsX + 3 * incrementButtonX, buttonsY + 3 * incrementButtonY), clr='white', cngclr='#ffcc99', size=(200, 50), text='QUIT', font='Assets\Fonts\Pixeltype.ttf', font_size=30)
 
     playButton.draw(screen)
     optionsButton.draw(screen)
@@ -96,11 +133,10 @@ def menu():
     if quitButton.mouseover():
         quitBtnAction()
 
+    if howToPlayButton.mouseover():
+        howToPlayBtnAction()
 
-def howToPlayButton(screen):
-    global gameLoop, bgColor
-    if pygame.mouse.get_pressed()[0]:
-        screen.fill(bgColor)
+
 
 
 def quitBtnAction():
@@ -121,6 +157,9 @@ scrInfo = pygame.display.Info()
 screen.fill(bgColor)
 loadBackground()
 loadTitle()
+buttonDisplay = True
+BACKGROUND = pygame.image.load("Assets/Images/poker.jpg")
+BACKGROUND = pygame.transform.scale(BACKGROUND,(scrInfo.current_w, scrInfo.current_h))
 
 while gameLoop:
     for event in pygame.event.get():
