@@ -1,12 +1,14 @@
-#Capmare
-#Giani
 import pygame
 import ptext
 from button import button
 from PIL import Image
 import time
+import os
+import game
+
 
 FONT = 'Assets\Fonts\Pixeltype.ttf'
+MODE = 'EASY' # predefinit ca fiind EASY
 
 def pil_to_game(img):
     data = img.tobytes("raw", "RGBA")
