@@ -1,3 +1,5 @@
+#Capmare
+#Giani
 import pygame
 import ptext
 from button import button
@@ -74,6 +76,10 @@ def loadTitle():
             break
 
         clock.tick(50)
+def playBtnAction():
+    test=game.Game(0)
+    test.playGame()
+
 
 def howToPlayBtnAction():
     global gameLoop, BACKGROUND
@@ -139,7 +145,8 @@ def menu():
 
     if howToPlayButton.mouseover():
         howToPlayBtnAction()
-
+    if playButton.mouseover():
+        playBtnAction()
 
 def quitBtnAction():
     global gameLoop

@@ -1,7 +1,7 @@
 import random
 
-import deck as dk
-
+import CardClass as dk
+import SimularePLayClassDezvoltata
 class Game:
     def __init__(self, mode):
         # self.deck = Deck()
@@ -31,10 +31,14 @@ class Game:
 
                 while True:
                     if turn == 0:
-                        self.handsChosen.append(self.player.chooseOption())
+                        x=self.player.chooseOption()
+                        self.handsChosen.append(x)
+                        turn=turn+1
+                        print(x)
+                        print('sunt prost')
                     else:
                         self.handsChosen.append(self.bot.chooseOption(self.handsChosen, self.mode))
-
+                        turn=(turn+1)%2
 
 
 # tip = 0 - player, tip = 1 - bot
@@ -47,10 +51,10 @@ class Player:
         self.cards = []
         # self.numberOfCards = 0
 
-    def chooseOption(self, handChosen = None, mode = 'Easy'):
+    def chooseOption(self, handChosen = [], mode = 'Easy'):
         if self.type == 0:
-            pass
-            # codul pentru afisarea ecranului de selectie(tabel, butoane - ce are Giani)
+           return SimularePLayClassDezvoltata.play_option()
+
 
 
         else:
@@ -117,61 +121,3 @@ class Player:
                         return (valueOfCard + 1, nr)
                     else:
                         return (2, nr + 1)
-
-            # codul pentru alegerea optiunii bot-ului, dupa care o afisez pe ecran
-            #     minti(se apeleaza fc)       cotninua(f continua - > alegerea 0)
-
-# self.player = classPLayer()
-
-# Deck = Deck()
-# Deck.creare()
-# Deck.shuffle()
-# #Deck.__str__()
-#
-# card = Deck.drawCard()
-# print(card.__str__())
-# print(Deck)
-#
-# class classPLayer:
-#     nrCarti = 6
-#     def __init__(self, ListOfCards):
-#         self.ListOfCards = ListOfCards
-#         self.ok = 0   # ok are rolul de a stii daca jucatorul a mintit sau nu 0 a mintit 1 nu
-#         self.numberOfCards = 1
-#
-#     def cardsAfterShuffle(self, ListOfCards):
-#         self.ListOfCards = ListOfCards
-#
-#     def increaseNumberOfCards(self):
-#         if self.ok == 1:
-#             self.numberOfCards = self.numbersOfCards + 1
-#             self.ok = 0
-#
-#     def game_over(self):
-#         cls = self.__class__
-#         if self.numberOfCards == cls.nrCarti:
-#             return "You are out"
-#         else:
-#             return "Continue to play"
-#
-#     def continue_to_play(self):
-#     #variabila tour_of_cards contine mana spusa de jucatorul
-#         return 1
-#     def said_minti(self, cards_in_total, hands_cards):
-#         is_in = 0
-#         for card in hands_cards:
-#             if card in cards_in_total:
-#                 is_in = is_in + 1
-#         if is_in == len(hands_cards):
-#             return "Minti"
-#         else:
-#             return "Corect"
-#
-#
-#     def a_mintit(self):
-#         self.ok = 1
-
-# c=classPLayer([1,2,4,5])
-# c.cardsAfterShuffle([1,2,3,3,34,3,3])
-# print(c.ListOfCards)
-# print(c.game_over())
