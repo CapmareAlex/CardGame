@@ -1,5 +1,3 @@
-#Capmare
-#Giani
 import pygame
 import ptext
 from button import button
@@ -22,7 +20,6 @@ def get_gif_frame(img, frame):
 
 def loadBackground():
     global screen, scrInfo
-
     backgroundImage = Image.open("Assets\Gifs\poker-full-house.gif")
     currentFrame = 0
 
@@ -77,8 +74,10 @@ def loadTitle():
 
         clock.tick(50)
 def playBtnAction():
-    test=game.Game(0)
-    test.playGame()
+    if pygame.mouse.get_pressed()[0]:
+        buttonClickSound.play()
+        test = game.Game("Easy")
+        test.playGame()
 
 
 def howToPlayBtnAction():
@@ -116,15 +115,69 @@ def howToPlayBtnAction():
         screen.blit(PHOTO, (0, 0))
         pygame.display.update()
 
+def optionBtnAction():
+    if pygame.mouse.get_pressed()[0]:
+        buttonClickSound.play()
+        pygame.init()
+        global screen, scrInfo
+
+        global MODE
+        done = False
+        clock = pygame.time.Clock()
+        pygame.display.update()
+        while not done:
+            background = pygame.image.load('background_play.jpg')
+            background = pygame.transform.scale(background, (scrInfo.current_w, scrInfo.current_h))
+            screen.blit(background, (0, 0))
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    done = True
+                if event.type == pygame.KEYDOWN:
+                    done = True
+
+            easyButton = button(position=(buttonsX, buttonsY), clr='white', cngclr='#ffcc99', size=(200, 50),
+                                text='EASY',
+                                font="Assets\Fonts\Pixeltype.ttf", font_size=30)
+            advancedButton = button(position=(buttonsX + 3 * incrementButtonX, buttonsY), clr='white', cngclr='#ffcc99', size=(200, 50), text='ADVANCED',
+                                    font='Assets\Fonts\Pixeltype.ttf', font_size=30)
+
+            backButton = button(position=(50, 25), clr='white', cngclr='#ffcc99', size=(100, 50),
+                                text=' <-BACK', font="Assets\Fonts\Pixeltype.ttf", font_size=30)
+
+
+            easyButton.draw(screen)
+            advancedButton.draw(screen)
+            backButton.draw(screen)
+
+            if easyButton.mouseover():
+                if pygame.mouse.get_pressed()[0]:
+                    buttonClickSound.play()
+                    time.sleep(0.5)
+                    MODE = 'Easy'
+
+            if advancedButton.mouseover():
+                if pygame.mouse.get_pressed()[0]:
+                    buttonClickSound.play()
+                    time.sleep(0.5)
+                    MODE = 'Advanced'
+
+            if backButton.mouseover():
+                if pygame.mouse.get_pressed()[0]:
+                    # added buttonClickSound - Ralu
+                    buttonClickSound.play()
+                    done = True
+            pygame.display.flip()
+
+        PHOTO = pygame.image.load("Assets/Images/frameFromGif.jpg")
+        PHOTO = pygame.transform.scale(PHOTO, (scrInfo.current_w, scrInfo.current_h))
+        screen.blit(PHOTO, (0, 0))
+        pygame.display.update()
+        clock.tick(60)
+
+
 def menu():
     global screen, currentFrame, backgroundImage, scrInfo
 
-    scrWidth = scrInfo.current_w
-    scrHeight = scrInfo.current_h
-    buttonsX = scrWidth // 4
-    buttonsY = scrHeight // 4
-    incrementButtonY = scrHeight // 6
-    incrementButtonX = scrWidth // 6
 
     playButton = button(position=(buttonsX, buttonsY), clr='white', cngclr='#ffcc99', size=(200, 50), text='PLAY', font="Assets\Fonts\Pixeltype.ttf", font_size=30)
     optionsButton = button(position=(buttonsX, buttonsY + 3 * incrementButtonY), clr='white', cngclr='#ffcc99', size=(200, 50), text='OPTIONS', font='Assets\Fonts\Pixeltype.ttf', font_size=30)
@@ -145,8 +198,12 @@ def menu():
 
     if howToPlayButton.mouseover():
         howToPlayBtnAction()
+
     if playButton.mouseover():
         playBtnAction()
+
+    if optionsButton.mouseover():
+        optionBtnAction()
 
 def quitBtnAction():
     global gameLoop
@@ -181,6 +238,12 @@ screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN, pygame.RESIZABLE)
 bgColor = '#251513'
 gameLoop = True
 scrInfo = pygame.display.Info()
+scrWidth = scrInfo.current_w
+scrHeight = scrInfo.current_h
+buttonsX = scrWidth // 4
+buttonsY = scrHeight // 4
+incrementButtonY = scrHeight // 6
+incrementButtonX = scrWidth // 6
 
 screen.fill(bgColor)
 loadBackground()
