@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\rotra\Desktop\Facultate\Anul 2\Sem_2\MDS\CardGame\venv"
+VIRTUAL_ENV="C:\Users\Geani\PycharmProjects\poiectMDS\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

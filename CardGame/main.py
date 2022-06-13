@@ -1,11 +1,16 @@
 #Capmare
+#Giani
 import pygame
 import ptext
 from button import button
 from PIL import Image
 import time
+import os
+import game
+
 
 FONT = 'Assets\Fonts\Pixeltype.ttf'
+MODE = 'EASY' # predefinit ca fiind EASY
 
 def pil_to_game(img):
     data = img.tobytes("raw", "RGBA")
@@ -71,11 +76,16 @@ def loadTitle():
             break
 
         clock.tick(50)
+def playBtnAction():
+    test=game.Game(0)
+    test.playGame()
+
 
 def howToPlayBtnAction():
     global gameLoop, BACKGROUND
     pygame.display.flip()
     if pygame.mouse.get_pressed()[0]:
+        buttonClickSound.play()
         f = open("Assets/How_To_Play.txt", "r")
         content = f.read()
         done = False
@@ -93,6 +103,8 @@ def howToPlayBtnAction():
             backButton.draw(screen)
             if backButton.mouseover():
                 if pygame.mouse.get_pressed()[0]:
+                    # added buttonClickSound - Ralu
+                    buttonClickSound.play()
                     done = True
 
             BLUE = pygame.Color('dodgerblue')
@@ -114,8 +126,6 @@ def menu():
     incrementButtonY = scrHeight // 6
     incrementButtonX = scrWidth // 6
 
-
-
     playButton = button(position=(buttonsX, buttonsY), clr='white', cngclr='#ffcc99', size=(200, 50), text='PLAY', font="Assets\Fonts\Pixeltype.ttf", font_size=30)
     optionsButton = button(position=(buttonsX, buttonsY + 3 * incrementButtonY), clr='white', cngclr='#ffcc99', size=(200, 50), text='OPTIONS', font='Assets\Fonts\Pixeltype.ttf', font_size=30)
     howToPlayButton = button(position=(buttonsX + 3 * incrementButtonX, buttonsY), clr='white', cngclr='#ffcc99', func = howToPlayBtnAction, size=(200, 50), text='HOW TO PLAY', font='Assets\Fonts\Pixeltype.ttf', font_size=30)
@@ -135,9 +145,8 @@ def menu():
 
     if howToPlayButton.mouseover():
         howToPlayBtnAction()
-
-
-
+    if playButton.mouseover():
+        playBtnAction()
 
 def quitBtnAction():
     global gameLoop
@@ -146,6 +155,25 @@ def quitBtnAction():
 
 ##############################################################
 pygame.init()
+
+
+# Sounds
+
+buttonClickSound = pygame.mixer.Sound('Assets/Sounds/buttonClickSound.wav')
+cardClickSound = pygame.mixer.Sound('Assets/Sounds/cardFlipSound.wav')
+shuffleSound = pygame.mixer.Sound('Assets/Sounds/shuffleSound.wav')
+winSound = pygame.mixer.Sound('Assets/Sounds/winTempSound.wav')
+quitSound = pygame.mixer.Sound('Assets/Sounds/quitSound.wav')
+
+buttonClickSound.set_volume(0.1)
+cardClickSound.set_volume(0.1)
+shuffleSound.set_volume(0.1)
+winSound.set_volume(0.1)
+quitSound.set_volume(0.03)
+
+music =  pygame.mixer.music.load('Assets/Sounds/bgMusic.mp3')
+pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(0.05)
 
 # Create game screen
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN, pygame.RESIZABLE)
@@ -170,5 +198,19 @@ while gameLoop:
 
     menu()
     pygame.display.update()
+
+# BEFORE QUITTING THE GAME: - Ralu
+
+# -> play buttonClickSound
+buttonClickSound.play()
+# -> add 100 ms delay
+pygame.time.delay(100)
+# -> then play quitSound
+quitSound.play()
+# -> fadeout BG music
+pygame.mixer.music.fadeout(500)
+# -> add 1500 ms delay until quitting game
+pygame.time.delay(1300)
+
 
 pygame.quit()
