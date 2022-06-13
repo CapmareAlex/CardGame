@@ -43,6 +43,10 @@ class Game:
                 deck.shuffle()
                 # au fost impartite cartile
                 self.player.cards = [deck.drawCard() for i in range(self.player.numberOfCards)]
+                print("TEST AICI")
+                for x in self.player.cards:
+                    print(x.valoare)
+                print("_________________________")
                 self.bot.cards = [deck.drawCard() for i in range(self.bot.numberOfCards)]
 
                 while True:
@@ -51,7 +55,6 @@ class Game:
                         self.handsChosen.append(x)
                         turn=turn+1
                         if self.bot.youLied(self.mode):
-                            turn = 0
                             if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
                                 print("Castigator e calculator. Ai spus o mana care nu exista la masa")
                                 self.player.numberOfCards += 1
@@ -67,11 +70,11 @@ class Game:
                         if option == 0:
                             if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
                                 print("Tu ai castigat! Botul a pus o mana care nu exista la masa!")
-                                self.player.numberOfCards += 1
+                                self.bot.numberOfCards += 1
                                 break
                             else:
                                 print("Caculatorul a castigat! Chiar sunt cartile in maini")
-                                self.bot.numberOfCards += 1
+                                self.player.numberOfCards += 1
                                 break
 
 
@@ -96,4 +99,5 @@ class Player:
            return SimularePLayClassDezvoltata.play_option(self.cards)
 
         else:
+            print("TEST")
             return DisplayBot.play(mode, handsChosen, self.cards)

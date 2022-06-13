@@ -303,7 +303,7 @@ def play_option(playerCards):
             com = 2
         if (x >= 385 and x < 425 and y >= 215 and y <= 285):
             com = 3
-        if (x >= 485 and x < 525 and x >= 215 and y <= 285):
+        if (x >= 485 and x < 525 and y >= 215 and y <= 285):
             com = 4
         poz = 0
         nr = 0

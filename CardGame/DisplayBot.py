@@ -14,12 +14,12 @@ def play(mode, handChosen, self_cards):
     clock = pygame.time.Clock()
     bot_solution = ()
     hasChosen = False
-
     pygame.init()
     pygame.display.update()
     done = False
     option = 0
     while not done:
+
         screen.blit(back1, (0, 0))
         pygame.event.get()
         findSol = False
