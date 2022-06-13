@@ -1,5 +1,5 @@
 import random
-
+import DisplayBot
 import CardClass as dk
 import SimularePLayClassDezvoltata
 class Game:
@@ -49,16 +49,26 @@ class Game:
                         turn=turn+1
                         if self.bot.youLied(self.mode):
                             if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
-                                print("Castigator e calculator")
+                                print("Castigator e calculator. Ai spus o mana care nu exista la masa")
                                 self.player.numberOfCards += 1
                                 break
                             else:
-                                print("Tu ai castigat")
+                                print("Tu ai castigat. Chiar sunt cartile in maini!")
                                 self.bot.numberOfCards += 1
                                 break
                     else:
-                        self.handsChosen.append(self.bot.chooseOption(self.handsChosen, self.mode))
+                        handBot, option = self.bot.chooseOption(self.handsChosen, self.mode)
+                        self.handsChosen.append(handBot)
                         turn=(turn+1)%2
+                        if option == 0:
+                            if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
+                                print("Tu ai castigat! Botul a pus o mana care nu exista la masa!")
+                                self.player.numberOfCards += 1
+                                break
+                            else:
+                                print("Caculatorul a castigat! Chiar sunt cartile in maini")
+                                self.bot.numberOfCards += 1
+                                break
 
 
 # tip = 0 - player, tip = 1 - bot
@@ -77,73 +87,9 @@ class Player:
         else:
             return 0
 
-    def chooseOption(self, handChosen = [], mode = 'Easy'):
+    def chooseOption(self, handsChosen = [], mode = 'Easy'):
         if self.type == 0:
            return SimularePLayClassDezvoltata.play_option(self.cards)
 
-
-
         else:
-            if mode == 'Easy':
-
-                valueOfCard, nr = handChosen[-1]
-
-                # retinem un vector de frecventa pentru carti
-                freqOfCards = dict()
-                for card in self.cards:
-                    if card.valoare in freqOfCards:
-                        freqOfCards[card.valoare] += 1
-                    else:
-                        freqOfCards[card.valoare] = 1
-
-                # s-ar putea sa nu mearga
-                sortedKeys = sorted(freqOfCards.keys())
-
-                # daca avem o mana mai mare in pachet, o alegem
-                for key in sortedKeys:
-                    if key == valueOfCard:
-                        if freqOfCards[key] > nr:
-                            return (key, nr + 1)
-                    elif key > valueOfCard:
-                        if freqOfCards[key] >= nr:
-                            return (key, nr)
-
-                # daca nu avem o mana mai mare, o alegem pe prima
-                # mai mare decat cea zisa de jucator
-                if valueOfCard < 14:
-                    return (valueOfCard + 1, nr)
-                else:
-                    return (2, nr + 1)
-
-            else :
-                valueOfCard, nr = handChosen[-1]
-                rdm = random.randint(0,1)   #generam random un nr
-                if rdm % 2 == 0:
-                    freqOfCards = dict()
-                    for card in self.cards:
-                        if card.valoare in freqOfCards:
-                            freqOfCards[card.valoare] += 1
-                        else:
-                            freqOfCards[card.valoare] = 1
-
-                    # s-ar putea sa nu mearga
-                    sortedKeys = sorted(freqOfCards.keys())
-
-                    for key in sortedKeys:
-                        if key == valueOfCard:
-                            if freqOfCards[key] > nr:
-                                return (key, nr + 1)
-                        elif key > valueOfCard:
-                            if freqOfCards[key] >= nr:
-                                return (key, nr)
-
-                    if valueOfCard < 14:
-                        return (valueOfCard + 1, nr)
-                    else:
-                        return (2, nr + 1)
-
-                else:
-                    if valueOfCard < 14:
-                        return (valueOfCard + 1, nr)
-                    else:
-                        return (2, nr + 1)
+            return DisplayBot.play(mode, handsChosen, self.cards)
