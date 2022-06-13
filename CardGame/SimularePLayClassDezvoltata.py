@@ -26,7 +26,7 @@ def fn4():
     print('Careu')
 def fn5():
     print('Submit')
-def play_option():
+def play_option(playerCards):
     global screen,scrInfo,background,back1
 
 
@@ -111,19 +111,11 @@ def play_option():
     y = 0
     colors = ['null', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b']
     running = True
-    player = PlayerClass.classPLayer([])
-    player_number_of_cards = player.numberOfCards
-    card_deck = CardClass.Deck()
 
-    card_deck.shuffle()
-    listofcards = []
-    while player_number_of_cards != 0:
-        listofcards.append(card_deck.carti[0])
-        card_deck.drawCard()
-        player_number_of_cards = player_number_of_cards - 1
+
+
     print_cards = []
-
-    for c in listofcards:
+    for c in playerCards:
         if c.valoare == 2:
             print_cards.append(card2_w)
         if c.valoare == 3:
@@ -152,8 +144,6 @@ def play_option():
             print_cards.append(cardA_w)
     # print(len(print_cards))
     list_comenzi = []  # pentru selectarea perechilor in caz ca avem mai multe
-    x_card_player = 20
-    y_card_player = 400
 
     button1 = buttons.button(position=(200, 250), size=(50, 70), clr=(220, 220, 220), cngclr=(255, 0, 0), func=fn1,
                             text='O carte')
@@ -169,6 +159,8 @@ def play_option():
     com = 0
     while running:
         clicking = False
+        x_card_player = 20
+        y_card_player = 400
         pos = pygame.mouse.get_pos()
         list_of_submit = []
         x_submit = 400
@@ -190,6 +182,7 @@ def play_option():
         show_player_cards(50, 300)
         for c in print_cards:
             card_blit(c, x_card_player, y_card_player)
+            y_card_player += 100
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

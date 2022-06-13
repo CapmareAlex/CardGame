@@ -13,6 +13,19 @@ class Game:
         # verif_minti(cartea_aleasa, mana, carti_bot, carti_player)
         # in cartile de bot + cartilde de player se gasesc carte* mana, atunci return 1, else return 0
 
+    def checkGame(self,handsChosen, playerCards, botCards):
+        valueOfCard , nr = handsChosen[-1]
+
+        freqVal = 0
+        for x in playerCards:
+            if x.valoare == valueOfCard:
+                freqVal += 1
+        for x in botCards:
+            if x.valoare == valueOfCard:
+                freqVal +=1
+
+        return freqVal < nr
+
     def playGame(self):
         turn = 0
         while True:
@@ -26,16 +39,23 @@ class Game:
             else:
                 deck.shuffle()
                 # au fost impartite cartile
-                self.player.cards = [deck.drawCard() for i in range(len(self.player.cards))]
-                self.bot.cards = [deck.drawCard() for i in range(len(self.bot.cards))]
+                self.player.cards = [deck.drawCard() for i in range(self.player.numberOfCards)]
+                self.bot.cards = [deck.drawCard() for i in range(self.bot.numberOfCards)]
 
                 while True:
                     if turn == 0:
                         x=self.player.chooseOption()
                         self.handsChosen.append(x)
                         turn=turn+1
-                        print(x)
-                        print('sunt prost')
+                        if self.bot.youLied(self.mode):
+                            if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
+                                print("Castigator e calculator")
+                                self.player.numberOfCards += 1
+                                break
+                            else:
+                                print("Tu ai castigat")
+                                self.bot.numberOfCards += 1
+                                break
                     else:
                         self.handsChosen.append(self.bot.chooseOption(self.handsChosen, self.mode))
                         turn=(turn+1)%2
@@ -49,11 +69,17 @@ class Player:
     def __init__(self, tip):
         self.type = tip
         self.cards = []
-        # self.numberOfCards = 0
+        self.numberOfCards = 1
+
+    def youLied(self, mode):
+        if mode == 'Easy':
+            return 1
+        else:
+            return 0
 
     def chooseOption(self, handChosen = [], mode = 'Easy'):
         if self.type == 0:
-           return SimularePLayClassDezvoltata.play_option()
+           return SimularePLayClassDezvoltata.play_option(self.cards)
 
 
 
