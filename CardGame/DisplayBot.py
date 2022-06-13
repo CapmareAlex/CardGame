@@ -2,7 +2,13 @@ import random
 import pygame
 
 from button import button
-
+def card_blit(card,x,y):
+    screen.blit(card,(x,y))
+def pc_cards(x, y):
+    font = pygame.font.Font('freesansbold.ttf', 32)
+    player_show = font.render("PC Cards To Submit: ", True, (255, 255, 255))
+    # player_show=pygame.transform.scale(player_show,(50,80))
+    screen.blit(player_show, (x, y))
 def play(mode, handChosen, self_cards):
     global screen, scrInfo
     scrHeight = scrInfo.current_h
@@ -103,6 +109,19 @@ def play(mode, handChosen, self_cards):
                         bot_solution = (2, nr + 1)
             hasChosen = True
             print(f"Botul a ales mana{bot_solution}\n")
+
+        card_submit_bot=bot_solution[0]
+        card_repeat=bot_solution[1]
+        card_to_print=pygame.image.load(f"Assets\\cards\\white\\{card_submit_bot}_inima.png")
+        x_start=scrWidth//8
+        y_start=scrHeight//3
+        pc_cards(scrWidth//5*2,scrHeight//5)
+        card_to_print= pygame.transform.scale(card_to_print, (70, 90))
+        for x_c in range(0,card_repeat):
+               card_blit(card_to_print,x_start,y_start)
+               x_start=x_start+scrWidth//8
+
+
 
         liedButton = button(position=(buttonsX, buttonsY + 3 * incrementButtonY), clr='white', cngclr='#ffcc99',
                             size=(200, 50), text='PC LIED', font='Assets\Fonts\Pixeltype.ttf', font_size=30)

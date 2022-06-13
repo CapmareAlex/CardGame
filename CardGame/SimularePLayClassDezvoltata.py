@@ -13,6 +13,12 @@ def show_player_cards(x,y):
      screen.blit(player_show,(x,y))
 
 
+def pc_cards(x, y):
+    font = pygame.font.Font('freesansbold.ttf', 32)
+    player_show = font.render("PC Cards: ", True, (255, 255, 255))
+    # player_show=pygame.transform.scale(player_show,(50,80))
+    screen.blit(player_show, (x, y))
+
 def fn1():
     print('O carte')
 def fn2():
