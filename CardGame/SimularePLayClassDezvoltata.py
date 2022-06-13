@@ -297,13 +297,13 @@ def play_option(playerCards):
             else:
                 cardA = cardA_b
                 colors[13] = 'b'
-        if (x >= 200 and x < 300 and y >= 220 and y <= 350):
+        if (x >= 185 and x <= 225 and y >= 215 and y <= 285):
             com = 1
-        if (x >= 300 and x < 400 and y >= 220 and y <= 350):
+        if (x >= 285 and x <= 325 and y >= 215 and y <= 285):
             com = 2
-        if (x >= 400 and x < 500 and y >= 220 and y <= 350):
+        if (x >= 385 and x < 425 and y >= 215 and y <= 285):
             com = 3
-        if (x >= 500 and y >= 220 and y <= 390):
+        if (x >= 485 and x < 525 and x >= 215 and y <= 285):
             com = 4
         poz = 0
         nr = 0
