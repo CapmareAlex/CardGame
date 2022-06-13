@@ -1,11 +1,8 @@
 import pygame
-import PlayerClass
-import time
-import CardClass
 import button
 import buttons
-import game
-import ptext
+
+
 def card_blit(card,x,y):
     screen.blit(card,(x,y))
 
@@ -194,34 +191,55 @@ def play_option(playerCards):
                 if event.key == pygame.K_ESCAPE:
                     running = False
 
-
         nr_culori = 0
         for x_c in colors:
             if x_c == 'w':
                 nr_culori = nr_culori + 1
+        global cardSelect
+        global flipped
         if (x >= 20 and x < 100 and y >= 100 and y <= 182):
             if colors[1] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 1
+                    cardFlip()
                 card2 = card2_w
                 colors[1] = 'w'
             else:
+                if flipped and cardSelect == 1:
+                    cardFlip()
                 card2 = card2_b
                 colors[1] = 'b'
         if (x >= 100 and x < 180 and y >= 100 and y <= 182):
             if colors[2] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 2
+                    cardFlip()
                 card3 = card3_w
                 colors[2] = 'w'
             else:
+                if flipped and cardSelect == 2:
+                    cardFlip()
                 card3 = card3_b
                 colors[2] = 'b'
         if (x >= 180 and x < 260 and y >= 100 and y <= 182):
             if colors[3] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 3
+                    cardFlip()
                 card4 = card4_w
                 colors[3] = 'w'
             else:
+                if flipped and cardSelect == 3:
+                    cardFlip()
                 card4 = card4_b
                 colors[3] = 'b'
         if (x >= 260 and x < 340 and y >= 100 and y <= 182):
+            if not flipped:
+                cardSelect = 4
+                cardFlip()
             if colors[4] == 'b' and nr_culori == 0:
+                if flipped and cardSelect == 4:
+                    cardFlip()
                 card5 = card5_w
                 colors[4] = 'w'
             else:
@@ -230,81 +248,131 @@ def play_option(playerCards):
 
         if (x >= 340 and x < 420 and y >= 100 and y <= 182):
             if colors[5] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 5
+                    cardFlip()
                 card6 = card6_w
                 colors[5] = 'w'
             else:
+                if flipped and cardSelect == 5:
+                    cardFlip()
                 card6 = card6_b
                 colors[5] = 'b'
         if (x >= 420 and x < 500 and y >= 100 and y <= 182):
             if colors[6] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 6
+                    cardFlip()
                 card7 = card7_w
                 colors[6] = 'w'
             else:
+                if flipped and cardSelect == 6:
+                    cardFlip()
                 card7 = card7_b
                 colors[6] = 'b'
         if (x >= 500 and x < 580 and y >= 100 and y <= 182):
             if colors[7] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 7
+                    cardFlip()
                 card8 = card8_w
                 colors[7] = 'w'
             else:
+                if flipped and cardSelect == 7:
+                    cardFlip()
                 card8 = card8_b
                 colors[7] = 'b'
 
         if (x >= 580 and x < 660 and y >= 100 and y <= 182):
             if colors[8] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 8
+                    cardFlip()
                 card9 = card9_w
                 colors[8] = 'w'
             else:
+                if flipped and cardSelect == 8:
+                    cardFlip()
                 card9 = card9_b
                 colors[8] = 'b'
 
         if (x >= 660 and x < 740 and y >= 100 and y <= 182):
             if colors[9] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 9
+                    cardFlip()
                 card10 = card10_w
                 colors[9] = 'w'
             else:
+                if flipped and cardSelect == 9:
+                    cardFlip()
                 card10 = card10_b
                 colors[9] = 'b'
 
         if (x >= 740 and x < 820 and y >= 100 and y <= 182):
             if colors[10] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 10
+                    cardFlip()
                 cardJ = cardJ_w
                 colors[10] = 'w'
             else:
+                if flipped and cardSelect == 10:
+                    cardFlip()
                 cardJ = cardJ_b
                 colors[10] = 'b'
 
         if (x >= 820 and x < 900 and y >= 100 and y <= 182):
             if colors[11] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 11
+                    cardFlip()
                 cardQ = cardQ_w
                 colors[11] = 'w'
             else:
+                if flipped and cardSelect == 11:
+                    cardFlip()
                 cardQ = cardQ_b
                 colors[11] = 'b'
 
         if (x >= 900 and x < 980 and y >= 100 and y <= 182):
             if colors[12] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 12
+                    cardFlip()
                 cardK = cardK_w
                 colors[12] = 'w'
             else:
+                if flipped and cardSelect == 12:
+                    cardFlip()
                 cardK = cardK_b
                 colors[12] = 'b'
 
         if (x >= 980 and y >= 100 and y <= 182):
             if colors[13] == 'b' and nr_culori == 0:
+                if not flipped:
+                    cardSelect = 13
+                    cardFlip()
                 cardA = cardA_w
                 colors[13] = 'w'
             else:
+                if flipped and cardSelect == 13:
+                    cardFlip()
                 cardA = cardA_b
                 colors[13] = 'b'
         if (x >= 185 and x <= 225 and y >= 215 and y <= 285):
+            buttonClickSound.play()
             com = 1
         if (x >= 285 and x <= 325 and y >= 215 and y <= 285):
+            buttonClickSound.play()
             com = 2
         if (x >= 385 and x < 425 and y >= 215 and y <= 285):
+            buttonClickSound.play()
             com = 3
-        if (x >= 485 and x < 525 and x >= 215 and y <= 285):
+        if (x >= 485 and x < 525 and y >= 215 and y <= 285):
+            buttonClickSound.play()
             com = 4
+
         poz = 0
         nr = 0
         for x in range(0, len(colors)):
@@ -349,6 +417,7 @@ def play_option(playerCards):
             list_of_submit=(poz+1,com)
         if submitButton.mouseover():
             if pygame.mouse.get_pressed()[0]:
+                shuffleSound.play()
                 print(list_of_submit)
                 #computer receptioneaza tuplul de carti catre computer
                 #apoi computerul zice daca am mintit sau nu 
@@ -363,9 +432,27 @@ def play_option(playerCards):
 
         pygame.display.update()
 
+def cardFlip():
+    global flipped
+    cardClickSound.play()
+    if flipped:
+        flipped = False
+    else:
+        flipped = True
+
+flipped = False
+cardSelect = 0
 
 pygame.init()
 scrInfo = pygame.display.Info()
 screen = pygame.display.set_mode((scrInfo.current_w, scrInfo.current_h), pygame.FULLSCREEN, pygame.RESIZABLE)
 background = pygame.image.load('background_play.jpg')
 back1 = pygame.transform.scale(background, (scrInfo.current_w, scrInfo.current_h))
+
+buttonClickSound = pygame.mixer.Sound('Assets/Sounds/buttonClickSound.wav')
+cardClickSound = pygame.mixer.Sound('Assets/Sounds/cardFlipSound.wav')
+shuffleSound = pygame.mixer.Sound('Assets/Sounds/shuffleSound.wav')
+
+buttonClickSound.set_volume(0.1)
+cardClickSound.set_volume(0.3)
+shuffleSound.set_volume(0.1)
