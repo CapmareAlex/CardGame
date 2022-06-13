@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\rotra\Desktop\Facultate\Anul 2\Sem_2\MDS\CardGame\venv
+set VIRTUAL_ENV=C:\Users\Geani\PycharmProjects\poiectMDS\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
