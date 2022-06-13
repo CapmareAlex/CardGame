@@ -3,7 +3,6 @@ import ptext
 from button import button
 from PIL import Image
 import time
-import os
 import game
 
 
@@ -73,12 +72,16 @@ def loadTitle():
             break
 
         clock.tick(50)
+
 def playBtnAction():
     if pygame.mouse.get_pressed()[0]:
         buttonClickSound.play()
-        test = game.Game("Easy")
-        test.playGame()
-
+        pygame.time.delay(100)
+        playAgain = True
+        while playAgain:
+            test = game.Game("Easy")
+            shuffleSound.play()
+            playAgain = test.playGame()
 
 def howToPlayBtnAction():
     global gameLoop, BACKGROUND
@@ -219,13 +222,11 @@ pygame.init()
 buttonClickSound = pygame.mixer.Sound('Assets/Sounds/buttonClickSound.wav')
 cardClickSound = pygame.mixer.Sound('Assets/Sounds/cardFlipSound.wav')
 shuffleSound = pygame.mixer.Sound('Assets/Sounds/shuffleSound.wav')
-winSound = pygame.mixer.Sound('Assets/Sounds/winTempSound.wav')
 quitSound = pygame.mixer.Sound('Assets/Sounds/quitSound.wav')
 
 buttonClickSound.set_volume(0.1)
 cardClickSound.set_volume(0.1)
 shuffleSound.set_volume(0.1)
-winSound.set_volume(0.1)
 quitSound.set_volume(0.03)
 
 music =  pygame.mixer.music.load('Assets/Sounds/bgMusic.mp3')

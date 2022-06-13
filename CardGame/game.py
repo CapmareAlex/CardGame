@@ -1,7 +1,8 @@
-import random
 import DisplayBot
 import CardClass as dk
 import SimularePLayClassDezvoltata
+import EndGameScreen
+
 class Game:
     def __init__(self, mode):
         # self.deck = Deck()
@@ -35,10 +36,11 @@ class Game:
             if self.player.numberOfCards == 6:
                 # trebuie creata o functie final
                 print("Bot wins!")
-                break
+                return EndGameScreen.endGame(False)
+
             elif self.bot.numberOfCards == 6:
                 print("Player wins!")
-                break
+                return EndGameScreen.endGame(True)
             else:
                 deck.shuffle()
                 # au fost impartite cartile
