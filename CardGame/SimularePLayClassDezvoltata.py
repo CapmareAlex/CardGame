@@ -150,7 +150,7 @@ def play_option():
             print_cards.append(cardK_w)
         if c.valoare == 14:
             print_cards.append(cardA_w)
-    print(len(print_cards))
+    # print(len(print_cards))
     list_comenzi = []  # pentru selectarea perechilor in caz ca avem mai multe
     x_card_player = 20
     y_card_player = 400
@@ -167,7 +167,6 @@ def play_option():
     button_y = 0
     card_select = 0
     com = 0
-
     while running:
         clicking = False
         pos = pygame.mouse.get_pos()
@@ -376,5 +375,4 @@ pygame.init()
 scrInfo = pygame.display.Info()
 screen = pygame.display.set_mode((scrInfo.current_w, scrInfo.current_h), pygame.FULLSCREEN, pygame.RESIZABLE)
 background = pygame.image.load('background_play.jpg')
-
 back1 = pygame.transform.scale(background, (scrInfo.current_w, scrInfo.current_h))
