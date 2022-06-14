@@ -2,7 +2,15 @@ import DisplayBot
 import CardClass as dk
 import SimularePLayClassDezvoltata
 import EndGameScreen
+import time
 
+def test_test(text,x, y):
+
+    font =  SimularePLayClassDezvoltata.pygame.font.Font('freesansbold.ttf', 32)
+    player_show = font.render(text, True, (255, 255, 255))
+    # player_show=pygame.transform.scale(player_show,(50,80))
+    SimularePLayClassDezvoltata.screen.blit(player_show, (x, y))
+    SimularePLayClassDezvoltata.pygame.display.update()
 class Game:
     def __init__(self, mode):
         # self.deck = Deck()
@@ -56,25 +64,38 @@ class Game:
                         x=self.player.chooseOption()
                         self.handsChosen.append(x)
                         turn=turn+1
+
+                        x_coord = SimularePLayClassDezvoltata.scrInfo.current_w //5
+                        y_coord=SimularePLayClassDezvoltata.scrInfo.current_h //5*4
                         if self.bot.youLied(self.mode):
                             if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
+
+                                test_test('The PC says you lied, You must take a card',x_coord, y_coord)
+                                time.sleep(2)
                                 print("Castigator e calculator. Ai spus o mana care nu exista la masa")
                                 self.player.numberOfCards += 1
                                 break
                             else:
+                                test_test('The Pc says you lied, It must take a card', x_coord, y_coord)
+                                time.sleep(2)
                                 print("Tu ai castigat. Chiar sunt cartile in maini!")
                                 self.bot.numberOfCards += 1
                                 break
                     else:
+                        #option=0 daca noi apasam pe minti 1 daca apasam pe continua
                         handBot, option = self.bot.chooseOption(self.handsChosen, self.mode)
                         self.handsChosen.append(handBot)
                         turn=(turn+1)%2
                         if option == 0:
                             if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
+                                test_test('You are right, The PC must take one card', x_coord, y_coord)
+                                time.sleep(2)
                                 print("Tu ai castigat! Botul a pus o mana care nu exista la masa!")
                                 self.bot.numberOfCards += 1
                                 break
                             else:
+                                test_test('You are wrong, You must take one card', x_coord, y_coord)
+                                time.sleep(2)
                                 print("Caculatorul a castigat! Chiar sunt cartile in maini")
                                 self.player.numberOfCards += 1
                                 break
