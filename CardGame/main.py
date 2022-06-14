@@ -79,7 +79,7 @@ def playBtnAction():
         pygame.time.delay(100)
         playAgain = True
         while playAgain:
-            test = game.Game("Easy")
+            test = game.Game(MODE)
             shuffleSound.play()
             playAgain = test.playGame()
 

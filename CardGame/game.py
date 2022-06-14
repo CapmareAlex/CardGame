@@ -1,10 +1,12 @@
+import random
+
 import DisplayBot
 import CardClass as dk
 import SimularePLayClassDezvoltata
 import EndGameScreen
 import time
 
-def test_test(text,x, y):
+def showChoiseInfo(text,x, y):
 
     font =  SimularePLayClassDezvoltata.pygame.font.Font('freesansbold.ttf', 32)
     player_show = font.render(text, True, (255, 255, 255))
@@ -67,16 +69,17 @@ class Game:
 
                         x_coord = SimularePLayClassDezvoltata.scrInfo.current_w //5
                         y_coord=SimularePLayClassDezvoltata.scrInfo.current_h //5*4
-                        if self.bot.youLied(self.mode):
+                        print(self.mode)
+                        if self.bot.youLied(self.mode, self.player.cards, self.bot.cards,self.handsChosen, self.checkGame(self.handsChosen, self.player.cards, self.bot.cards)):
                             if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
 
-                                test_test('The PC says you lied, You must take a card',x_coord, y_coord)
+                                showChoiseInfo('The PC says you lied, You must take a card',x_coord, y_coord)
                                 time.sleep(2)
                                 print("Castigator e calculator. Ai spus o mana care nu exista la masa")
                                 self.player.numberOfCards += 1
                                 break
                             else:
-                                test_test('The Pc says you lied, It must take a card', x_coord, y_coord)
+                                showChoiseInfo('The Pc says you lied, It must take a card', x_coord, y_coord)
                                 time.sleep(2)
                                 print("Tu ai castigat. Chiar sunt cartile in maini!")
                                 self.bot.numberOfCards += 1
@@ -88,13 +91,13 @@ class Game:
                         turn=(turn+1)%2
                         if option == 0:
                             if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
-                                test_test('You are right, The PC must take one card', x_coord, y_coord)
+                                showChoiseInfo('You are right, The PC must take one card', x_coord, y_coord)
                                 time.sleep(2)
                                 print("Tu ai castigat! Botul a pus o mana care nu exista la masa!")
                                 self.bot.numberOfCards += 1
                                 break
                             else:
-                                test_test('You are wrong, You must take one card', x_coord, y_coord)
+                                showChoiseInfo('You are wrong, You must take one card', x_coord, y_coord)
                                 time.sleep(2)
                                 print("Caculatorul a castigat! Chiar sunt cartile in maini")
                                 self.player.numberOfCards += 1
@@ -111,11 +114,29 @@ class Player:
         self.cards = []
         self.numberOfCards = 1
 
-    def youLied(self, mode):
+    def youLied(self, mode, playerHand, botHand, handsChosen, valueOfYouLied):
+        '''
+        Modul easy : calculatorul alege sa spuna minti mereu
+        Modul advanced : se genereaza random un numar de la 1 la 4, daca numarul e 1, atunci calculatorul va sti ce carti sunt in ambele maini, deci daca va spune minti va avea sigur dreptate,
+                         altfel, daca numarul e 4, va spune minti, dar nu va sti daca are drepate sigur sau nu, iar daca e 2 sau 3 atunci el alege sa continuie jocul
+        '''
         if mode == 'Easy':
             return 1
         else:
-            return 0
+            i = random.randint(1,4)
+
+            if i == 1:
+                if valueOfYouLied == True:
+                    return 1
+                else:
+                    return 0
+            elif i == 4:
+                return 1
+            else:
+                return 0
+
+
+
 
     def chooseOption(self, handsChosen = [], mode = 'Easy'):
         if self.type == 0:
