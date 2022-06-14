@@ -55,10 +55,6 @@ class Game:
                 deck.shuffle()
                 # au fost impartite cartile
                 self.player.cards = [deck.drawCard() for i in range(self.player.numberOfCards)]
-                print("TEST AICI")
-                for x in self.player.cards:
-                    print(x.valoare)
-                print("_________________________")
                 self.bot.cards = [deck.drawCard() for i in range(self.bot.numberOfCards)]
 
                 while True:
@@ -69,21 +65,24 @@ class Game:
 
                         x_coord = SimularePLayClassDezvoltata.scrInfo.current_w //5
                         y_coord=SimularePLayClassDezvoltata.scrInfo.current_h //5*4
-                        print(self.mode)
-                        if self.bot.youLied(self.mode, self.player.cards, self.bot.cards,self.handsChosen, self.checkGame(self.handsChosen, self.player.cards, self.bot.cards)):
+
+                        if self.bot.youLied(self.mode, self.player.cards, self.bot.cards,self.handsChosen, self.checkGame(self.handsChosen, self.player.cards, self.bot.cards)) or x == (14,4):
                             if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
 
                                 showChoiseInfo('The PC says you lied, You must take a card',x_coord, y_coord)
                                 time.sleep(2)
                                 print("Castigator e calculator. Ai spus o mana care nu exista la masa")
                                 self.player.numberOfCards += 1
+                                self.handsChosen = []
                                 break
                             else:
                                 showChoiseInfo('The Pc says you lied, It must take a card', x_coord, y_coord)
                                 time.sleep(2)
                                 print("Tu ai castigat. Chiar sunt cartile in maini!")
                                 self.bot.numberOfCards += 1
+                                self.handsChosen = []
                                 break
+
                     else:
                         #option=0 daca noi apasam pe minti 1 daca apasam pe continua
                         handBot, option = self.bot.chooseOption(self.handsChosen, self.mode)
@@ -94,6 +93,7 @@ class Game:
                                 showChoiseInfo('You are right, The PC must take one card', x_coord, y_coord)
                                 time.sleep(2)
                                 print("Tu ai castigat! Botul a pus o mana care nu exista la masa!")
+                                self.handsChosen = []
                                 self.bot.numberOfCards += 1
                                 break
                             else:
@@ -101,7 +101,9 @@ class Game:
                                 time.sleep(2)
                                 print("Caculatorul a castigat! Chiar sunt cartile in maini")
                                 self.player.numberOfCards += 1
+                                self.handsChosen = []
                                 break
+
 
 
 # tip = 0 - player, tip = 1 - bot

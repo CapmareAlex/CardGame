@@ -32,8 +32,14 @@ def play(mode, handChosen, self_cards):
         if hasChosen == False:
             if mode == 'Easy':
 
-                valueOfCard, nr = handChosen[-1]
-
+                if handChosen:
+                    valueOfCard, nr = handChosen[-1]
+                else:
+                    valueOfCard = 1
+                    nr = 1
+                print("TESTARE LINIA 40 - DISPALY BOT")
+                print(valueOfCard, nr)
+                print("==================")
                 # retinem un vector de frecventa pentru carti
                 freqOfCards = dict()
                 for card in self_cards:
@@ -69,7 +75,15 @@ def play(mode, handChosen, self_cards):
 
 
             else:
-                valueOfCard, nr = handChosen[-1]
+
+                if handChosen:
+                    valueOfCard, nr = handChosen[-1]
+                else:
+                    valueOfCard = 1
+                    nr = 1
+                print("TESTARE LINIA 40 - DISPALY BOT")
+                print(valueOfCard, nr)
+                print("==================")
                 rdm = random.randint(0, 1)  # generam random un nr
                 if rdm % 2 == 0:
                     freqOfCards = dict()

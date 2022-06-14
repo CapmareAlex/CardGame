@@ -7,7 +7,7 @@ import game
 
 
 FONT = 'Assets\Fonts\Pixeltype.ttf'
-MODE = 'EASY' # predefinit ca fiind EASY
+MODE = 'Easy' # predefinit ca fiind EASY
 
 def pil_to_game(img):
     data = img.tobytes("raw", "RGBA")
