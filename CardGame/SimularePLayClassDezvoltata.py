@@ -118,6 +118,10 @@ def play_option(playerCards):
 
 
     print_cards = []
+    print("LINIA 121 SimularePlay : Afisare cartile din mana jucatorului!")
+    for c in playerCards:
+        print(c.valoare)
+    print("Isire din LINIA 121\n")
     for c in playerCards:
         if c.valoare == 2:
             print_cards.append(card2_w)
@@ -415,19 +419,21 @@ def play_option(playerCards):
         if poz == 0:
             card_select = 0
             com = 0
-        if card_select != 0:
+        if card_select != 0 and com > 0:
             for x1 in range(0, com):
                 card_blit(card_select, x_submit, y_submit)
                 x_submit = x_submit + 50
 
             list_of_submit=(poz+1,com)
-        if submitButton.mouseover():
-            if pygame.mouse.get_pressed()[0]:
-                shuffleSound.play()
-                print(list_of_submit)
-                #computer receptioneaza tuplul de carti catre computer
-                #apoi computerul zice daca am mintit sau nu 
-                return list_of_submit
+
+        if list_of_submit:
+            if submitButton.mouseover():
+                if pygame.mouse.get_pressed()[0]:
+                    shuffleSound.play()
+                    print(list_of_submit)
+                    #computer receptioneaza tuplul de carti catre computer
+                    #apoi computerul zice daca am mintit sau nu
+                    return list_of_submit
 
 
         x = 0

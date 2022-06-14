@@ -7,7 +7,8 @@ FONT = 'Assets\Fonts\Pixeltype.ttf'
 scrInfo = pygame.display.Info()
 
 winSound = pygame.mixer.Sound('Assets/Sounds/winSound.wav')
-loseSound = pygame.mixer.Sound('Assets/Sounds/loseSound.mp3')
+loseSound = pygame.mixer.Sound('Assets'
+                               '/Sounds/loseSound.mp3')
 buttonClickSound = pygame.mixer.Sound('Assets/Sounds/buttonClickSound.wav')
 
 buttonClickSound.set_volume(0.1)

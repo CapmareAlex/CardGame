@@ -22,7 +22,7 @@ class Deck:
     #metoda prin care adaugam cartile
     def creare(self):
         for cul in ["trefla", "inima", "frunza", "romb"]:
-            for val in range(1, 14):
+            for val in range(2, 14):
                 # paths for card images
                 imgPathWhite = f"Assets\\cards\\white\{val}_{cul}.png"
                 imgPathBlack = f"Assets\cards\\black\{val}_{cul}.png"
