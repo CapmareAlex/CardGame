@@ -6,7 +6,7 @@ Software Development Methods - Project - 2nd year of University - Faculty of Mat
 [comment]: # (finished)
 
 - **[Capmare Alex](https://github.com/CapmareAlex)**
-- **[Butelca Radu]()**
+- **[Butelca Radu](https://github.com/abradu28)**
 - **[Fritz Raluca](https://github.com/ralucafritz)**
 - **[Rotaru Radu](https://github.com/radu-rotaru)**
 - **[Visalon Giani](https://github.com/Giani2001)**
