@@ -41,8 +41,11 @@ Software Development Methods - Project - 2nd year of University - Faculty of Mat
 
 ## Backlog
 
+### Sprint#1
 ![](BacklogSprint1.JPG)
+### Sprint#2
 ![](BacklogSprint2.JPG)
+### Sprint#3
 ![](BacklogSprint3.JPG)
 
 ## User Stories
