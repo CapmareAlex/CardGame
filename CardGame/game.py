@@ -1,18 +1,16 @@
 import random
 
-import DisplayBot
 import CardClass as dk
-import SimularePLayClassDezvoltata
-import EndGameScreen
+from Interfaces import HumanInterface, WinnerInterface, BotInterface
 import time
 
 def showChoiseInfo(text,x, y):
 
-    font =  SimularePLayClassDezvoltata.pygame.font.Font('freesansbold.ttf', 32)
+    font =  HumanInterface.pygame.font.Font('freesansbold.ttf', 32)
     player_show = font.render(text, True, (255, 255, 255))
     # player_show=pygame.transform.scale(player_show,(50,80))
-    SimularePLayClassDezvoltata.screen.blit(player_show, (x, y))
-    SimularePLayClassDezvoltata.pygame.display.update()
+    HumanInterface.screen.blit(player_show, (x, y))
+    HumanInterface.pygame.display.update()
 class Game:
     def __init__(self, mode):
         # self.deck = Deck()
@@ -46,11 +44,11 @@ class Game:
             if self.player.numberOfCards == 6:
                 # trebuie creata o functie final
                 print("Bot wins!")
-                return EndGameScreen.endGame(False)
+                return WinnerInterface.endGame(False)
 
             elif self.bot.numberOfCards == 6:
                 print("Player wins!")
-                return EndGameScreen.endGame(True)
+                return WinnerInterface.endGame(True)
             else:
                 deck.shuffle()
                 # au fost impartite cartile
@@ -63,8 +61,8 @@ class Game:
                         self.handsChosen.append(x)
                         turn=turn+1
 
-                        x_coord = SimularePLayClassDezvoltata.scrInfo.current_w //5
-                        y_coord=SimularePLayClassDezvoltata.scrInfo.current_h //5*4
+                        x_coord = HumanInterface.scrInfo.current_w // 5
+                        y_coord= HumanInterface.scrInfo.current_h // 5 * 4
 
                         if self.bot.youLied(self.mode, self.player.cards, self.bot.cards,self.handsChosen, self.checkGame(self.handsChosen, self.player.cards, self.bot.cards)) or x == (14,4):
                             if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
@@ -142,8 +140,8 @@ class Player:
 
     def chooseOption(self, handsChosen = [], mode = 'Easy'):
         if self.type == 0:
-           return SimularePLayClassDezvoltata.play_option(self.cards)
+           return HumanInterface.play_option(self.cards)
 
         else:
             print("TEST")
-            return DisplayBot.play(mode, handsChosen, self.cards)
+            return BotInterface.play(mode, handsChosen, self.cards)
