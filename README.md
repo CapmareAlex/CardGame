@@ -1,13 +1,23 @@
 # MDS-Project
 Software Development Methods - Project - 2nd year of University - Faculty of Mathematics and Informatics at the University of Bucharest
 
+## Project team:
+
+[comment]: # (finished)
+
+- **[Capmare Alex](https://github.com/CapmareAlex)**
+- **[Butelca Radu]()**
+- **[Fritz Raluca](https://github.com/ralucafritz)**
+- **[Rotaru Radu](https://github.com/radu-rotaru)**
+- **[Visalon Giani](https://github.com/Giani2001)**
+
+
 ---
 
 ## Table of Contents
 
 [comment]: # (finished)
 
-[0. Project Team](#project-team)  
 [1. Project Description](#project-description)   
 [2. Application demo](#application-demo)  
 [3. Backlog](#backlog)  
@@ -21,19 +31,10 @@ Software Development Methods - Project - 2nd year of University - Faculty of Mat
 [11. Design Patterns](#design-patterns)  
     
 
-## Project team:
-
-[comment]: # (finished)
-
-- **[Capmare Alex](https://github.com/CapmareAlex)**
-- **[Butelca Radu]()**
-- **[Fritz Raluca](https://github.com/ralucafritz)**
-- **[Rotaru Radu](https://github.com/radu-rotaru)**
-- **[Visalon Giani](https://github.com/Giani2001)**
-
 ## Project Description
 
-[comment]: # (to be added)
+[comment]: # (to be completed)
+
 
 ## Application demo 
 
@@ -89,16 +90,16 @@ Software Development Methods - Project - 2nd year of University - Faculty of Mat
 
 ## Automation Testing
 
-[comment]: # (to be added)
+[comment]: # (to be completed)
 
 ## Build Tool
 
-[comment]: # (to be added)
+[comment]: # (to be completed)
 
 ## Code Standards
 
-[comment]: # (to be added)
+[comment]: # (to be added or removed)
 
 ## Design Patterns
 
-[comment]: # (to be added)
+[comment]: # (to be completed)
