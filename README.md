@@ -7,18 +7,18 @@ Software Development Methods - Project - 2nd year of University - Faculty of Mat
 
 [comment]: # (finished)
 
-[0. Project Team](#project-team)
-[1. Project Description](#project-description)
-[2. Application demo](#application-demo)
-[3. Backlog](#backlog)
-[4. User Stories](#user-stories)
-[5. Bug Reporting](#bug-reporting)
-[6. UML Diagram](#uml-diagram)
-[7. Sourse Control](#source-control)
-[8. Automation Testing](#automation-testing)
-[9. Build Tool](#build-tool)
-[10. Code Standards](#code-standards)
-[11. Design Patterns](#design-patterns)
+[0. Project Team](#project-team)  
+[1. Project Description](#project-description)   
+[2. Application demo](#application-demo)  
+[3. Backlog](#backlog)  
+[4. User Stories](#user-stories)  
+[5. Bug Reporting](#bug-reporting)  
+[6. UML Diagram](#uml-diagram)  
+[7. Sourse Control](#source-control)  
+[8. Automation Testing](#automation-testing)  
+[9. Build Tool](#build-tool)  
+[10. Code Standards](#code-standards)   
+[11. Design Patterns](#design-patterns)  
     
 
 ## Project team:
