@@ -1,5 +1,6 @@
 import pygame
 import ptext
+from CardGame import SoundsUtil
 from button import button
 from PIL import Image
 import time
@@ -75,19 +76,20 @@ def loadTitle():
 
 def playBtnAction():
     if pygame.mouse.get_pressed()[0]:
-        buttonClickSound.play()
+        SoundsUtil.buttonClickSoundPlay()
         pygame.time.delay(100)
         playAgain = True
         while playAgain:
             test = game.Game(MODE)
-            shuffleSound.play()
+            SoundsUtil.shuffleSoundPlay()
             playAgain = test.playGame()
+            SoundsUtil.musicUnpause()
 
 def howToPlayBtnAction():
     global gameLoop, BACKGROUND
     pygame.display.flip()
     if pygame.mouse.get_pressed()[0]:
-        buttonClickSound.play()
+        SoundsUtil.buttonClickSoundPlay()
         f = open("Assets/How_To_Play.txt", "r")
         content = f.read()
         done = False
@@ -106,7 +108,7 @@ def howToPlayBtnAction():
             if backButton.mouseover():
                 if pygame.mouse.get_pressed()[0]:
                     # added buttonClickSound - Ralu
-                    buttonClickSound.play()
+                    SoundsUtil.buttonClickSoundPlay()
                     done = True
 
             BLUE = pygame.Color('dodgerblue')
@@ -120,7 +122,7 @@ def howToPlayBtnAction():
 
 def optionBtnAction():
     if pygame.mouse.get_pressed()[0]:
-        buttonClickSound.play()
+        SoundsUtil.buttonClickSoundPlay()
         pygame.init()
         global screen, scrInfo
 
@@ -154,20 +156,20 @@ def optionBtnAction():
 
             if easyButton.mouseover():
                 if pygame.mouse.get_pressed()[0]:
-                    buttonClickSound.play()
+                    SoundsUtil.buttonClickSoundPlay()
                     time.sleep(0.5)
                     MODE = 'Easy'
 
             if advancedButton.mouseover():
                 if pygame.mouse.get_pressed()[0]:
-                    buttonClickSound.play()
+                    SoundsUtil.buttonClickSoundPlay()
                     time.sleep(0.5)
                     MODE = 'Advanced'
 
             if backButton.mouseover():
                 if pygame.mouse.get_pressed()[0]:
                     # added buttonClickSound - Ralu
-                    buttonClickSound.play()
+                    SoundsUtil.buttonClickSoundPlay()
                     done = True
             pygame.display.flip()
 
@@ -180,7 +182,6 @@ def optionBtnAction():
 
 def menu():
     global screen, currentFrame, backgroundImage, scrInfo
-
 
     playButton = button(position=(buttonsX, buttonsY), clr='white', cngclr='#ffcc99', size=(200, 50), text='PLAY', font="Assets\Fonts\Pixeltype.ttf", font_size=30)
     optionsButton = button(position=(buttonsX, buttonsY + 3 * incrementButtonY), clr='white', cngclr='#ffcc99', size=(200, 50), text='OPTIONS', font='Assets\Fonts\Pixeltype.ttf', font_size=30)
@@ -215,24 +216,7 @@ def quitBtnAction():
 
 ##############################################################
 pygame.init()
-
-
-# Sounds
-
-buttonClickSound = pygame.mixer.Sound('Assets/Sounds/buttonClickSound.wav')
-cardClickSound = pygame.mixer.Sound('Assets/Sounds/cardFlipSound.wav')
-shuffleSound = pygame.mixer.Sound('Assets/Sounds/shuffleSound.wav')
-quitSound = pygame.mixer.Sound('Assets/Sounds/quitSound.wav')
-
-buttonClickSound.set_volume(0.1)
-cardClickSound.set_volume(0.1)
-shuffleSound.set_volume(0.1)
-quitSound.set_volume(0.03)
-
-music =  pygame.mixer.music.load('Assets/Sounds/bgMusic.mp3')
-pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.05)
-
+SoundsUtil.musicPlay()
 # Create game screen
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN, pygame.RESIZABLE)
 
@@ -266,11 +250,12 @@ while gameLoop:
 # BEFORE QUITTING THE GAME: - Ralu
 
 # -> play buttonClickSound
-buttonClickSound.play()
+SoundsUtil.buttonClickSoundPlay()
 # -> add 100 ms delay
 pygame.time.delay(100)
 # -> then play quitSound
-quitSound.play()
+SoundsUtil.musicStop()
+SoundsUtil.quitSoundPlay()
 # -> fadeout BG music
 pygame.mixer.music.fadeout(500)
 # -> add 1500 ms delay until quitting game

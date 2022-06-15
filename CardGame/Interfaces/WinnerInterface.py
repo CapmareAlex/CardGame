@@ -1,22 +1,16 @@
 import pygame
-from button import button
-import ptext
+from CardGame.button import button
+from CardGame import ptext, SoundsUtil
 
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN, pygame.RESIZABLE)
 FONT = 'Assets\Fonts\Pixeltype.ttf'
 scrInfo = pygame.display.Info()
 
-winSound = pygame.mixer.Sound('Assets/Sounds/winSound.wav')
-loseSound = pygame.mixer.Sound('Assets/Sounds/loseSound.mp3')
-buttonClickSound = pygame.mixer.Sound('Assets/Sounds/buttonClickSound.wav')
-
-buttonClickSound.set_volume(0.1)
-winSound.set_volume(0.1)
-loseSound.set_volume(0.1)
 
 def endGame(endResult):
+    SoundsUtil.musicPause()
     if endResult:
-        winSound.play()
+        SoundsUtil.winSoundPlay()
         bg = pygame.image.load("Assets/Images/winTempPic.jpg")
         msg = "YOU \n" \
               "WON"
@@ -26,7 +20,7 @@ def endGame(endResult):
         playAgainButtonPos = (350, 1000)
         mainMenuButtonPos = (700, 1000)
     else:
-        loseSound.play()
+        SoundsUtil.loseSoundPlay()
         bg = pygame.image.load("Assets/Images/loseTempPic.jpg")
         msg = "YOU LOST"
         clr = 'white'
@@ -34,7 +28,6 @@ def endGame(endResult):
         txt_size = 300
         playAgainButtonPos = (700, 1000)
         mainMenuButtonPos = (1260, 1000)
-
     bg = pygame.transform.scale(bg, (scrInfo.current_w, scrInfo.current_h))
     done = False
     clock = pygame.time.Clock()
@@ -54,13 +47,13 @@ def endGame(endResult):
 
         if playAgainButton.mouseover():
             if pygame.mouse.get_pressed()[0]:
-                buttonClickSound.play()
+                SoundsUtil.buttonClickSoundPlay()
                 done = True
                 return True
 
         if mainMenuButton.mouseover():
             if pygame.mouse.get_pressed()[0]:
-                buttonClickSound.play()
+                SoundsUtil.buttonClickSoundPlay()
                 pygame.display.update()
                 done = True
 

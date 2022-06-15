@@ -1,16 +1,16 @@
 import pygame
-import button
-import buttons
+from CardGame import button, buttons, SoundsUtil
 
 
-def card_blit(card,x,y):
-    screen.blit(card,(x,y))
+def card_blit(card, x, y):
+    screen.blit(card, (x, y))
 
-def show_player_cards(x,y):
-     font = pygame.font.Font('freesansbold.ttf', 32)
-     player_show=font.render("Player Cards: ", True,(255,255,255))
-     #player_show=pygame.transform.scale(player_show,(50,80))
-     screen.blit(player_show,(x,y))
+
+def show_player_cards(x, y):
+    font = pygame.font.Font('freesansbold.ttf', 32)
+    player_show = font.render("Player Cards: ", True, (255, 255, 255))
+    # player_show=pygame.transform.scale(player_show,(50,80))
+    screen.blit(player_show, (x, y))
 
 
 def pc_cards(x, y):
@@ -19,19 +19,29 @@ def pc_cards(x, y):
     # player_show=pygame.transform.scale(player_show,(50,80))
     screen.blit(player_show, (x, y))
 
+
 def fn1():
     print('O carte')
+
+
 def fn2():
     print('Pereche')
+
+
 def fn3():
     print('Cui')
+
+
 def fn4():
     print('Careu')
+
+
 def fn5():
     print('Submit')
-def play_option(playerCards):
-    global screen,scrInfo,background,back1
 
+
+def play_option(playerCards):
+    global screen, scrInfo, background, back1
 
     card2_b = pygame.image.load('Assets/cards/black/2_inima.png')
     card2_w = pygame.image.load('Assets/cards/white/2_inima.png')
@@ -115,8 +125,6 @@ def play_option(playerCards):
     colors = ['null', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b']
     running = True
 
-
-
     print_cards = []
     print("LINIA 121 SimularePlay : Afisare cartile din mana jucatorului!")
     for c in playerCards:
@@ -153,12 +161,13 @@ def play_option(playerCards):
     list_comenzi = []  # pentru selectarea perechilor in caz ca avem mai multe
 
     button1 = buttons.button(position=(200, 250), size=(50, 70), clr=(220, 220, 220), cngclr=(255, 0, 0), func=fn1,
-                            text='O carte')
+                             text='O carte')
     button2 = buttons.button((300, 250), (50, 70), (220, 220, 220), (255, 0, 0), fn2, 'Pereche')
     button3 = buttons.button((400, 250), (50, 70), (220, 220, 220), (255, 0, 0), fn3, 'Cui')
     button4 = buttons.button((500, 250), (50, 70), (220, 220, 220), (255, 0, 0), fn4, 'Careu')
     submitButton = button.button(position=(1070, 600), clr='white',
-                        cngclr='#ffcc99', size=(200, 50), text='Submit', font='Assets\Fonts\Pixeltype.ttf', font_size=30)
+                                 cngclr='#ffcc99', size=(200, 50), text='Submit', font='Assets\Fonts\Pixeltype.ttf',
+                                 font_size=30)
     button_list = [button1, button2, button3, button4, submitButton]
     button_x = 0
     button_y = 0
@@ -371,16 +380,16 @@ def play_option(playerCards):
                 cardA = cardA_b
                 colors[13] = 'b'
         if (x >= 185 and x <= 225 and y >= 215 and y <= 285):
-            buttonClickSound.play()
+            SoundsUtil.buttonClickSoundPlay()
             com = 1
         if (x >= 285 and x <= 325 and y >= 215 and y <= 285):
-            buttonClickSound.play()
+            SoundsUtil.buttonClickSoundPlay()
             com = 2
         if (x >= 385 and x < 425 and y >= 215 and y <= 285):
-            buttonClickSound.play()
+            SoundsUtil.buttonClickSoundPlay()
             com = 3
         if (x >= 485 and x < 525 and y >= 215 and y <= 285):
-            buttonClickSound.play()
+            SoundsUtil.buttonClickSoundPlay()
             com = 4
 
         poz = 0
@@ -424,17 +433,16 @@ def play_option(playerCards):
                 card_blit(card_select, x_submit, y_submit)
                 x_submit = x_submit + 50
 
-            list_of_submit=(poz+1,com)
+            list_of_submit = (poz + 1, com)
 
         if list_of_submit:
             if submitButton.mouseover():
                 if pygame.mouse.get_pressed()[0]:
-                    shuffleSound.play()
+                    SoundsUtil.shuffleSoundPlay()
                     print(list_of_submit)
-                    #computer receptioneaza tuplul de carti catre computer
-                    #apoi computerul zice daca am mintit sau nu
+                    # computer receptioneaza tuplul de carti catre computer
+                    # apoi computerul zice daca am mintit sau nu
                     return list_of_submit
-
 
         x = 0
         y = 0
@@ -444,13 +452,15 @@ def play_option(playerCards):
 
         pygame.display.update()
 
+
 def cardFlip():
     global flipped
-    cardClickSound.play()
+    SoundsUtil.cardClickSoundPlay()
     if flipped:
         flipped = False
     else:
         flipped = True
+
 
 flipped = False
 cardSelect = 0
@@ -460,11 +470,3 @@ scrInfo = pygame.display.Info()
 screen = pygame.display.set_mode((scrInfo.current_w, scrInfo.current_h), pygame.FULLSCREEN, pygame.RESIZABLE)
 background = pygame.image.load('background_play.jpg')
 back1 = pygame.transform.scale(background, (scrInfo.current_w, scrInfo.current_h))
-
-buttonClickSound = pygame.mixer.Sound('Assets/Sounds/buttonClickSound.wav')
-cardClickSound = pygame.mixer.Sound('Assets/Sounds/cardFlipSound.wav')
-shuffleSound = pygame.mixer.Sound('Assets/Sounds/shuffleSound.wav')
-
-buttonClickSound.set_volume(0.1)
-cardClickSound.set_volume(0.3)
-shuffleSound.set_volume(0.1)
