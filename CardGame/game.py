@@ -1,5 +1,7 @@
 import random
 
+import pygame
+
 import CardClass as dk
 from Interfaces import HumanInterface, WinnerInterface, BotInterface
 import time
@@ -58,28 +60,34 @@ class Game:
                 while True:
                     if turn == 0:
                         x=self.player.chooseOption()
-                        self.handsChosen.append(x)
-                        turn=turn+1
+                        if x:
+                            self.handsChosen.append(x)
+                            turn=turn+1
 
-                        x_coord = HumanInterface.scrInfo.current_w // 5
-                        y_coord= HumanInterface.scrInfo.current_h // 5 * 4
+                            x_coord = HumanInterface.scrInfo.current_w // 5
+                            y_coord= HumanInterface.scrInfo.current_h // 5 * 4
+                            print("SUNT AICI")
+                            print(self.handsChosen)
+                            if self.bot.youLied(self.mode, self.player.cards, self.bot.cards,self.handsChosen, self.checkGame(self.handsChosen, self.player.cards, self.bot.cards)) or x == (14,4):
+                                if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
 
-                        if self.bot.youLied(self.mode, self.player.cards, self.bot.cards,self.handsChosen, self.checkGame(self.handsChosen, self.player.cards, self.bot.cards)) or x == (14,4):
-                            if self.checkGame(self.handsChosen, self.player.cards, self.bot.cards):
-
-                                showChoiseInfo('The PC says you lied, You must take a card',x_coord, y_coord)
-                                time.sleep(2)
-                                print("Castigator e calculator. Ai spus o mana care nu exista la masa")
-                                self.player.numberOfCards += 1
-                                self.handsChosen = []
-                                break
-                            else:
-                                showChoiseInfo('The Pc says you lied, It must take a card', x_coord, y_coord)
-                                time.sleep(2)
-                                print("Tu ai castigat. Chiar sunt cartile in maini!")
-                                self.bot.numberOfCards += 1
-                                self.handsChosen = []
-                                break
+                                    showChoiseInfo('The PC says you lied, You must take a card',x_coord, y_coord)
+                                    time.sleep(2)
+                                    print("Castigator e calculator. Ai spus o mana care nu exista la masa")
+                                    self.player.numberOfCards += 1
+                                    self.handsChosen = []
+                                    break
+                                else:
+                                    showChoiseInfo('The Pc says you lied, It must take a card', x_coord, y_coord)
+                                    time.sleep(2)
+                                    print("Tu ai castigat. Chiar sunt cartile in maini!")
+                                    self.bot.numberOfCards += 1
+                                    self.handsChosen = []
+                                    break
+                        else:
+                            pygame.quit()
+                            exit()
+                            break
 
                     else:
                         #option=0 daca noi apasam pe minti 1 daca apasam pe continua

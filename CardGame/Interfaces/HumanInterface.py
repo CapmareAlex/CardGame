@@ -118,10 +118,7 @@ def play_option(playerCards):
 
 
     print_cards = []
-    print("LINIA 121 SimularePlay : Afisare cartile din mana jucatorului!")
-    for c in playerCards:
-        print(c.valoare)
-    print("Isire din LINIA 121\n")
+
     for c in playerCards:
         if c.valoare == 2:
             print_cards.append(card2_w)
