@@ -78,9 +78,6 @@ def play(mode, handChosen, self_cards):
                 else:
                     valueOfCard = 1
                     nr = 1
-                print("TESTARE LINIA 40 - DISPALY BOT")
-                print(valueOfCard, nr)
-                print("==================")
                 rdm = random.randint(0, 1)  # generam random un nr
                 if rdm % 2 == 0:
                     freqOfCards = dict()
@@ -112,7 +109,7 @@ def play(mode, handChosen, self_cards):
                         bot_solution = (2, nr + 1)
 
                 else:
-                    if valueOfCard < 14 and bot_solution == False:
+                    if valueOfCard < 14 and findSol == False:
                         findSol = True
                         bot_solution = (valueOfCard + 1, nr)
                     elif findSol == False:
