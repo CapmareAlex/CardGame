@@ -1,7 +1,9 @@
 import random
 import pygame
 
-from button import button
+from CardGame import SoundsUtil
+from CardGame.button import button
+
 def card_blit(card,x,y):
     screen.blit(card,(x,y))
 def pc_cards(x, y):
@@ -147,10 +149,12 @@ def play(mode, handChosen, self_cards):
         continueButton.draw(screen)
         if liedButton.mouseover():
             if pygame.mouse.get_pressed()[0]:
+                SoundsUtil.buttonClickSoundPlay()
                 option = 0
                 done = True
         if continueButton.mouseover():
             if pygame.mouse.get_pressed()[0]:
+                SoundsUtil.buttonClickSoundPlay()
                 option = 1
                 done = True
         pygame.display.update()
