@@ -39,7 +39,6 @@ Deocamdata aplicatia permite doar  *player-PC*, __advanced__ si __easy__, urmand
 
 ## Application demo 
 Youtube : https://youtu.be/mdgEK8j4QsA
-[comment]: # (Ralu)
 
 ## Backlog
 
