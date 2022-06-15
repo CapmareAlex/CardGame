@@ -38,7 +38,7 @@ Regulile jocului sunt:
 Deocamdata aplicatia permite doar  *player-PC*, __advanced__ si __easy__, urmand sa se implementeze pentru urmatoarele update-uri si modul multiplayer.
 
 ## Application demo 
-
+Youtube : https://youtu.be/mdgEK8j4QsA
 [comment]: # (Ralu)
 
 ## Backlog
