@@ -26,16 +26,17 @@
 
 ## Project Description
 
-Ideea de la baza proiectului a fost una simpla, anume de a crea un joc impotriva PC-ului, pornind de la jocul de societate "Minti", ce are ca drept scop aflarea celui care minte cel mai bine dintre toti. Pentru o intelegere mai simpla, este o versiune mai simpla a pokerului, eliminandu-se anumite tipuri de maini precum chinta sau culoarea, dar si miza. 
-Regulile jocului sunt:
-- castigator este cel care ramane in cele din urma la masa
-- cine ajunge la 6 carti pierde
-- la inceputul jocului, "primul la vorba" trebuie sa spuna o carte sau o combinatie de carti ce crede ca se afla la masa(adica ce are in mana sau are adversarul, calculatorul) astfel incat sa induca in eroare oponentul.
-- in cazul in care oponentul spune "Minti" trebuie sa fie afisate cartile si daca o minciuna s-a produs, adica nu se afla la masa ceea ce s-a zis pentru ultima oara, player-ul trebuie sa ia o carte in plus; in caz contrar, calculatorul este cel care minte si trebuie sa ia o carte in plus;
-- daca la un moment dat jucatorul spune o anumita carte, adversarul trebuie sa spuna ori "minti", ori sa ridice "stacheta", spunand o carte (sau combinatie) mai mare; 
-- combinatiile de carti sunt pereche (2 carti de acelasi tip), cui (3 carti de acelasi tip), careu(4 carti de acelasi tip), urmand sa se mai adauge cu ocazie altor update-uri mai multe;
+The idea behind this project was a simple one, to create a PC game similar to the card game "Minti", where you have to be careful with what you are saying in order to win. To make it easier to understand, you can think of it as a simpler version of poker, without some types of hands(flush or color).
 
-Deocamdata aplicatia permite doar  *player-PC*, __advanced__ si __easy__, urmand sa se implementeze pentru urmatoarele update-uri si modul multiplayer.
+The rules of the game:
+   - the last one standing at the table is the winner(there is no such thing as a draw)
+   - if someone has 6 cards, he/she loses
+   - at the start of the game, the first player has to say a hand that he thinks(or not) can be formed from all of the cards dealt at the table. But he can choose any hand, even if he does not have even one card from that hand. He can do this to mislead the next player
+   - the next player has two options: to say that the last player lied or to continue the game in the same manner as the last player, but saying a hand greater than him. If he considers that the last player lied, all the players show their cards and if the last hand can be formed from those cards, the cards are dealt again and the current player receives a card more than the last time, otherwise, if the hand cannot be formed, the last player receives one extra card.
+   - the hands of the game are: one card, two of a kind, three of a kind, four of a kind.
+   
+Currently the application is only singleplayer(playing against the computers), with two levels of difficulty: __easy__ and __advanced__.
+Future updates may implement multiplayer mode.
 
 ## Application demo 
 Youtube : https://youtu.be/mdgEK8j4QsA
@@ -69,12 +70,13 @@ Youtube : https://youtu.be/mdgEK8j4QsA
 ## Bug Reporting
 
 De-a lungul timpului, 	aplicația a suferit modificări pentru a ajunge la un joc care să funcționeze normal fără a întâlni anumite defecțiuni. Pentru a ajunge la un produs finit care să mulțumească clientul, jocul a avut parte de o serie de bug-uri care au fost rezolvate între timp. Bug-urile găsite de-a lungul împlementării au fost:
+During implementation, the project has suffered multiple changes in order to function without bugs. Here are some of the bugs that we've found and tried to solve:
 
-1. **Bug pentru afișarea cărții selectate**
-   - problema întâmpinată era la selectarea cărților. 
-   - inainte ca o alegere a unei cărți să fie făcută, toate cele 13 cărți au culoarea neagră, și când selectăm o carte aceasta să devină albă. 
-   - O problemă era că doream să avem doar o singură carte selectată și numai una și dacă doream să ne răzgândim cu alegerea făcută întâi să refacem cartea în culoarea neagră pentru a putea selecta alta. 
-   - Metoda folosită pentru rezolvarea acestei probleme a fost să reținem într-o listăculorile cărților înainte de a apăsa pe ele și când toate cărțile erau negre coloram numai o carte astfel încât să știm cartea selectată și numai una, astfel spus în listă să existe doar o carte de culoare alb, și pentru a schimba varianta întâi transformăm cartea albă în cartea neagră, și apoi selectăm cartea dorită
+1. **Card selection bug**
+   - the problem was found when trying to select cards
+   - before a card is chosen, all cards are black, and after selection, the card selected is turned to a white one
+   - the problem was that we could select multiple cards at once, but we wanted to be able to select only one card
+   - to solve this problem, we stored the colors of the cards before pressing them and when one card was pressed, we changed its color to white. But only a card from the list could be white, if we wanted to change the selected card, we firstly had to deselect the white card(transforming it back to black) and select another one.
 
 2. **Sound bug when trying to flip multiple cards**
    - it occurs when you select a card and you start clicking fast on another card that is not flipped
@@ -85,6 +87,12 @@ De-a lungul timpului, 	aplicația a suferit modificări pentru a ajunge la un jo
    - the main idea behind adding the shuffle cards sound was that the sound effect should be playing after the screen changes, followed by a delay in showing the UI elements
    - this bug is still _**not resolved**_.
 
+4. **Displaying the wrong number of cards**
+   - the problem was found when trying to select cards
+   - when selecting the number of cards of a type, the number of cards displayed was not always the same as the one pressed by the user
+   - the problem was that the selection area for those buttons was not the same as the area of the button itself, and sometimes the wrong input was chosen
+   - to solve the problem, we've updated the selection areas of the buttons to be the same as the are of buttons that they represented
+   
 ## UML Diagram
 
 [comment]: # (Ralu)
@@ -153,6 +161,6 @@ Those changes were made in this [commit](https://github.com/CapmareAlex/CardGame
 
 ## Design Patterns
 
-Un design pattern este o descriere a soluției sau un template( șablon) ce  poate  fi  aplicat  pentru rezolvarea problemei, nu o bucată de cod ce poate fi aplicată direct.  
-Predominant în jocul nostru și cel mai important design pattern folosit este User Interface, prin care am implementat clasele care definesc jocul, și anume clasa Player care conferă playerului cărțile alese și opțiunile pe care vrea să și le aleagă, și clasa DisplayBot care ne arată opțiunile alese de bot, dacă va continua să joace mâna în continuare sau zice că playerul a mințit și mâna prezisă de acesta.  
-Aceste două clase au fost adăugate în interfața grafică a jocului, unde putem să jucăm împotriva calculatorului care are alegeri de făcut ori să zică o mână de joc ori crede că playerul minte. 
+A design pattern is a description of a solution or a template which can be used to solve a problem.
+In our game the main design pattern used was the User Interface, in which we have implemented the classes that define the game, the Player class which stores the cards of the user and provides him with actions to perform, and DisplayBot class which simulates a real player by trying to calculate the decision that the PC is going to make in a given state of the game.
+These two classes were added to the graphical interface of the game, where we can play against the computer who can choose to continue the game or to say that the user is lying.
