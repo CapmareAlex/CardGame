@@ -34,8 +34,8 @@ The rules of the game:
    - at the start of the game, the first player has to say a hand that he thinks(or not) can be formed from all of the cards dealt at the table. But he can choose any hand, even if he does not have even one card from that hand. He can do this to mislead the next player
    - the next player has two options: to say that the last player lied or to continue the game in the same manner as the last player, but saying a hand greater than him. If he considers that the last player lied, all the players show their cards and if the last hand can be formed from those cards, the cards are dealt again and the current player receives a card more than the last time, otherwise, if the hand cannot be formed, the last player receives one extra card.
    - the hands of the game are: one card, two of a kind, three of a kind, four of a kind.
-   
-Currently the application is only singleplayer(playing against the computers), with two levels of difficulty: __easy__ and __advanced__.
+
+Currently the application is only singleplayer(playing against the computer), with two levels of difficulty: __easy__ and __advanced__.
 Future updates may implement multiplayer mode.
 
 ## Application demo 
