@@ -20,9 +20,10 @@
 [5. Bug Reporting](#bug-reporting)  
 [6. UML Diagram](#uml-diagram)  
 [7. Sourse Control](#source-control)  
-[8. Automation Testing](#automation-testing)  
-[11. Code refactoring](#code-refactoring)   
-[12. Design Patterns](#design-patterns)  
+[8. Code refactoring](#code-refactoring)   
+[9. Design Patterns](#design-patterns)  
+
+---
 
 ## Project Description
 
@@ -39,7 +40,7 @@ Currently the application is only singleplayer(playing against the computer), wi
 Future updates may implement multiplayer mode.
 
 ## Application demo 
-Youtube : https://youtu.be/mdgEK8j4QsA
+The demo can be found on [Youtube/CapmareAlex](https://youtu.be/mdgEK8j4QsA).
 
 ## Backlog
 
@@ -95,7 +96,7 @@ During implementation, the project has suffered multiple changes in order to fun
    
 ## UML Diagram
 
-[comment]: # (Ralu)
+![](cardgameUML.jpg)
 
 ## Source Control
 
@@ -106,10 +107,6 @@ During implementation, the project has suffered multiple changes in order to fun
   - _branch-giani-visalon_  - contains the workspace used by **[Visalon Giani](https://github.com/Giani2001)**
 
 **Commits:** https://github.com/CapmareAlex/MDS-Project/commits/main
-
-## Automation Testing
-
-[comment]: # (to be completed)
 
 ## Code refactoring
 We have made many improvements to our code along the way, a few of the most recent ones are:
