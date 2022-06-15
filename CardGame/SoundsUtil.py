@@ -1,6 +1,5 @@
 import pygame
-from tkinter import *
-from tkinter.ttk import *
+
 
 pygame.init()
 
