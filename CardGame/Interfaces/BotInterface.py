@@ -34,14 +34,11 @@ def play(mode, handChosen, self_cards):
         if hasChosen == False:
             if mode == 'Easy':
 
-                if handChosen:
+                if handChosen :
                     valueOfCard, nr = handChosen[-1]
                 else:
                     valueOfCard = 1
                     nr = 1
-                print("TESTARE LINIA 40 - DISPALY BOT")
-                print(valueOfCard, nr)
-                print("==================")
                 # retinem un vector de frecventa pentru carti
                 freqOfCards = dict()
                 for card in self_cards:
