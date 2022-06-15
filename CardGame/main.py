@@ -96,11 +96,9 @@ def howToPlayBtnAction():
         pygame.init()
         clock = pygame.time.Clock()
         while not done:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    done = True
-                if event.type == pygame.KEYDOWN:
-                    done = True
+
+            done = checkIfQuit()
+
             screen.blit(BACKGROUND, (0, 0))
             backButton = button(position=(50, 25), clr='white', cngclr='#ffcc99', size=(100, 50),
                                 text=' <-BACK', font="Assets\Fonts\Pixeltype.ttf", font_size=30)
@@ -134,11 +132,8 @@ def optionBtnAction():
             background = pygame.image.load('background_play.jpg')
             background = pygame.transform.scale(background, (scrInfo.current_w, scrInfo.current_h))
             screen.blit(background, (0, 0))
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    done = True
-                if event.type == pygame.KEYDOWN:
-                    done = True
+
+            done = checkIfQuit()
 
             easyButton = button(position=(buttonsX, buttonsY), clr='white', cngclr='#ffcc99', size=(200, 50),
                                 text='EASY',
@@ -214,6 +209,13 @@ def quitBtnAction():
     if pygame.mouse.get_pressed()[0]:
         gameLoop = False
 
+def checkIfQuit():
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            return True
+        if event.type == pygame.KEYDOWN:
+            return True
+
 ##############################################################
 pygame.init()
 SoundsUtil.musicPlay()
@@ -238,12 +240,7 @@ BACKGROUND = pygame.image.load("Assets/Images/poker.jpg")
 BACKGROUND = pygame.transform.scale(BACKGROUND,(scrInfo.current_w, scrInfo.current_h))
 
 while gameLoop:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            gameLoop = False
-        if event.type == pygame.KEYDOWN:
-            gameLoop = False
-
+    gameLoop = not checkIfQuit()
     menu()
     pygame.display.update()
 
