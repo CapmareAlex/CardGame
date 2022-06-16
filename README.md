@@ -70,7 +70,6 @@ The demo can be found on [Youtube/CapmareAlex](https://youtu.be/mdgEK8j4QsA).
 
 ## Bug Reporting
 
-De-a lungul timpului, 	aplicația a suferit modificări pentru a ajunge la un joc care să funcționeze normal fără a întâlni anumite defecțiuni. Pentru a ajunge la un produs finit care să mulțumească clientul, jocul a avut parte de o serie de bug-uri care au fost rezolvate între timp. Bug-urile găsite de-a lungul împlementării au fost:
 During implementation, the project has suffered multiple changes in order to function without bugs. Here are some of the bugs that we've found and tried to solve:
 
 1. **Card selection bug**
